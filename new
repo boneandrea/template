@@ -1,17 +1,19 @@
 #!/bin/bash
 
+SELF=`dirname $0`
+SCRIPT_DIR=`readlink -f $0`
+TEMPLATE_DIR=`dirname $SCRIPT_DIR`/templates
+
 usage_exit() {
     echo "Usage: $0 [-a] [-l lang] item ..." 1>&2
-    echo -n "Available languages are: "
-    ls -x $SCRIPT_DIR | sed "N;s/\n/, /m" | sed "s/\.template//g"
+    echo "Available languages are:" 
+    ls -x $TEMPLATE_DIR | sed "N;s/\n/, /m" | sed "s/\.template//g"
     exit 1
 }
 
 if [ "$1" = "" ]; then
     usage_exit
 fi
-
-SCRIPT_DIR=$(cd $(dirname $0); pwd)/templates
 
 while getopts al:h OPT
 do
@@ -27,7 +29,7 @@ do
     esac
 done
 
-TEMPLATE=$SCRIPT_DIR/$TARGET_LANG.template
+TEMPLATE=$TEMPLATE_DIR/$TARGET_LANG.template
 if [ ! -f $TEMPLATE ]; then
     echo "$TARGET_LANG.template does not exist."
     exit 1
