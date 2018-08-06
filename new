@@ -1,0 +1,36 @@
+#!/bin/bash
+
+usage_exit() {
+    echo "Usage: $0 [-a] [-l lang] item ..." 1>&2
+    echo -n "Available languages are: "
+    ls -x $SCRIPT_DIR | sed "N;s/\n/, /m" | sed "s/\.template//g"
+    exit 1
+}
+
+if [ "$1" = "" ]; then
+    usage_exit
+fi
+
+SCRIPT_DIR=$(cd $(dirname $0); pwd)/templates
+
+while getopts al:h OPT
+do
+    case $OPT in
+        a)  FLAG_A=1
+            ;;
+        l)  TARGET_LANG=$OPTARG
+            ;;
+        h)  usage_exit
+            ;;
+        \?) usage_exit
+            ;;
+    esac
+done
+
+TEMPLATE=$SCRIPT_DIR/$TARGET_LANG.template
+if [ ! -f $TEMPLATE ]; then
+    echo "$TARGET_LANG.template does not exist."
+    exit 1
+fi
+
+cat $TEMPLATE
