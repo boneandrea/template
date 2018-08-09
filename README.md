@@ -6,3 +6,12 @@
 # How
 - 各言語のテンプレをtemplates/から読み出す  
 - 新しい言語やる度にtemplates/に投入
+
+# Usage
+```
+bashの新規ツールを作る場合
+$ new -l bash > new_script.sh
+
+perlの同
+$ new -l perl > new_script.pl
+```
