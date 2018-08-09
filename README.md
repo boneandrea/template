@@ -14,4 +14,6 @@ $ new -l bash > new_script.sh
 
 perlの同
 $ new -l perl > new_script.pl
+
+引数無しでhelp
 ```
