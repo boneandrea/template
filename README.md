@@ -17,3 +17,9 @@ $ new -l perl > new_script.pl
 
 引数無しでhelp
 ```
+
+# Install
+```
+git clone
+ln -s clone_dir/new ~/bin/new (PATHの通ったディレクトリならどこでも)
+```
